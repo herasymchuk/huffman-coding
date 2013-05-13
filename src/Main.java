@@ -12,28 +12,31 @@ import java.io.InputStreamReader;
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void  main(String[] args) throws IOException {
         String number = "";
         //Only outside IDE
         //Console console = System.console();
         //number = console.readLine("Input number: ");
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Press 'Q' to quit.");
-        while (true) {
-            System.out.print("Input number:");
-            try {
-                number = br.readLine();
-                if(number.toLowerCase().equals("q")) {
-                    return;
-                }
-                System.out.println(number + "^2 = " + Math.pow(Double.parseDouble(number), 2));
-            } catch(IOException e){
-                System.err.println("IO error occurred!");
-            }  catch (NumberFormatException e) {
-                System.err.println("Format error: '" + number + "' cannot be converted to number!");
-            }
-        }
-
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        System.out.println("Press 'Q' to quit.");
+//        while (true) {
+//            System.out.print("Input number:");
+//            try {
+//                number = br.readLine();
+//                if(number.toLowerCase().equals("q")) {
+//                    return;
+//                }
+//                System.out.println(number + "^2 = " + Math.pow(Double.parseDouble(number), 2));
+//            } catch(IOException e){
+//                System.err.println("IO error occurred!");
+//            }  catch (NumberFormatException e) {
+//                System.err.println("Format error: '" + number + "' cannot be converted to number!");
+//            }
+//      }
+        HuffmanEncoder encoder = new HuffmanEncoder();
+        encoder.encodeTextFile("D:/ws/java/huffman-coding/src/original.txt", "D:/ws/java/huffman-coding/src/encode.bin");
+        HuffmanDecoder decoder = new HuffmanDecoder();
+        decoder.decodeTextFile("D:/ws/java/huffman-coding/src/encode.bin", "D:/ws/java/huffman-coding/src/decode.txt");
     }
 }
