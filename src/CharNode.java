@@ -20,10 +20,6 @@ public class CharNode implements Comparable, Serializable {
         this.frequency = leftNode.frequency + rightNode.frequency;
     }
 
-    public CharNode(int frequency) {
-        this.frequency = frequency;
-    }
-
     public CharNode(int frequency, char item) {
         this.frequency = frequency;
         this.item = item;

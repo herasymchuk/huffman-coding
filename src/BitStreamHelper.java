@@ -51,18 +51,21 @@ public class BitStreamHelper {
     }
 
     private void convertBytes2Bits() {
+        if(binaryData.isEmpty()) {
+            return;
+        }
         bitsArray.clear();
-        int k = 0;
-        numBitsInCurrentByte = binaryData.get(0);
+        int k;
+        byte numBitsInLastByte = binaryData.get(0);
         for(int i = 1; i <  binaryData.size(); i++) {
             k = 128;
             for(int j = 8; j > 0; j--) {
-                bitsArray.add((binaryData.get(i).intValue() & k) == k ? 1 : 0);
+                bitsArray.add((binaryData.get(i) & k) == k ? 1 : 0);
                 k >>= 1;
             }
         }
-        while (numBitsInCurrentByte-- > 0) {
-            bitsArray.remove(bitsArray.size()-1);
+        while (numBitsInLastByte > 0 && (8 - numBitsInLastByte++) > 0) {
+            bitsArray.remove(bitsArray.size() - 1);
         }
     }
 

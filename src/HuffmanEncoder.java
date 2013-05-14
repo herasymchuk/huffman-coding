@@ -12,17 +12,11 @@ import java.util.PriorityQueue;
  */
 public class HuffmanEncoder {
 
-    private String inputText;
     private HashMap<Character, Integer> charFrequencyMap =  new HashMap<Character, Integer>();
     private HashMap<Character, ArrayList<Integer>> charCodesMap =  new HashMap<Character, ArrayList<Integer>>();
-    private CharNode headNode;
 
     public HuffmanEncoder() {
 
-    }
-
-    public CharNode getHeadNode() {
-        return headNode;
     }
 
     public void encodeTextFile(String inFileName, String outFileName) {
@@ -36,9 +30,12 @@ public class HuffmanEncoder {
     }
 
     public CompressedData encodeString(String text) {
+        if(text.isEmpty()) {
+            return new CompressedData(null, new ArrayList<Byte>());
+        }
         calculateCharacterFrequencyInString(text);
         PriorityQueue<CharNode> queue = buildCharsPriorityQueue();
-        headNode = buildTree(queue);
+        CharNode headNode = buildTree(queue);
         buildCharCodesDictionary(headNode, new ArrayList<Integer>());
         return new CompressedData(headNode, compress(text));
     }
@@ -56,8 +53,7 @@ public class HuffmanEncoder {
 
     private PriorityQueue<CharNode> buildCharsPriorityQueue() {
         PriorityQueue<CharNode> queue = new PriorityQueue<CharNode>(charFrequencyMap.size());
-        Object[] uniqueCharArray = charFrequencyMap.keySet().toArray();
-        for(Object curChar : uniqueCharArray) {
+        for(Object curChar : charFrequencyMap.keySet()) {
             queue.offer(new CharNode(charFrequencyMap.get(curChar), (Character)curChar));
         }
         return queue;

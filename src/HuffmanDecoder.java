@@ -50,9 +50,9 @@ public class HuffmanDecoder {
         ArrayList<Integer> bits = new BitStreamHelper(bytes).getBitsArray();
         ArrayList<Integer> charCode = new ArrayList<Integer>();
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < bits.size(); i++) {
-            charCode.add(bits.get(i));
-            if(codesCharMap.containsKey(charCode)) {
+        for (Integer bit : bits) {
+            charCode.add(bit);
+            if (codesCharMap.containsKey(charCode)) {
                 sb.append(codesCharMap.get(charCode));
                 charCode.clear();
             }
